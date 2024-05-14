@@ -38,6 +38,7 @@ document.getElementById("create-form").addEventListener("submit", function(e){
 
    const email = document.getElementById("email-create-input").value;
    const senha = document.getElementById("password-create-input").value;
+   const confirmsenha = document.getElementById("password-confirm-create-input").value;
 
    if(email.length < 5) {
     alert("Preencha o campo com um e-mail válido!")
@@ -48,7 +49,10 @@ document.getElementById("create-form").addEventListener("submit", function(e){
     alert("A senha deve conter no mínimo 4 dígitos")
     return;
    }
-
+   if(senha!== confirmsenha){ 
+      alert("As senhas não corresponder! Por favor, verifique sua senha.");
+       return;
+   }
    saveAccount ({
       login: email,
       password: senha,
