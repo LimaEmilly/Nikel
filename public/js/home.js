@@ -30,6 +30,7 @@ document.getElementById("transaction-form").addEventListener("submit", function(
     getCashIn();
     getCashOut();
     getTotal();
+    checkNegativeBalance();
 
     alert("Lançamento adicionado com sucesso!");
 });
@@ -56,6 +57,8 @@ function checkLogged() {
     getCashOut();
     getTotal();
  }
+    checkNegativeBalance();
+
 
  function logout(){
      sessionStorage.removeItem("logged");
@@ -160,3 +163,19 @@ function checkLogged() {
  function saveData(data) {
      localStorage.setItem(data.login, JSON.stringify(data));
  }
+ function calculateBalance() {
+    return data.transactions.reduce((acc, item) => {
+        if (item.type === "1") {
+            return acc + item.value;
+        } else {
+            return acc - item.value;
+        }
+    }, 0);
+}
+
+function checkNegativeBalance() {
+    const balance = calculateBalance();
+    if (balance < 0) {
+        alert("Atenção: seu saldo ficará negativo após este lançamento!");
+    }
+}
